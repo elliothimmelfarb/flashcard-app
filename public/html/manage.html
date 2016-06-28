@@ -1,4 +1,23 @@
 <div class="container-fluid">
   <h3>manage</h3>
+  <pre>{{allCards}}</pre>
+
+  <div class="addCardArea text-center">
+    <form ng-submit='addCard(card)' class="form-inline">
+      <div class="form-group">
+        <input ng-model='card.description' type="text" class="form-control" placeholder="The question..." required>
+      </div>
+      <div class="form-group">
+        <input ng-model='card.answer' type="text" class="form-control" placeholder="The answer..." required>
+      </div>
+      <div class="form-group selectDiv">
+        <select ng-model='card.category' class='form-control' value='credit'>
+          <option value="credit">Credit</option>
+          <option value="debit">Debit</option>
+        </select>
+      </div>
+      <button class="btn btn-default">Add Transaction</button>
+    </form>
+  </div>
 
 </div>
