@@ -1,4 +1,9 @@
 <div class="container-fluid">
-  <h3>view</h3>
-
+  <h3>Test</h3>
+  <div class="subjectsToggleDiv">
+    <span ng-repeat='subject in categories'>
+      <button ng-init='selected = false' ng-class="{true: 'btn btn-primary', false: 'btn btn-default'}[selected]" ng-click'toggleSubject(subject); selected = !selected'>{{subject}}</button>
+    </span>
+  </div>
+  
 </div>

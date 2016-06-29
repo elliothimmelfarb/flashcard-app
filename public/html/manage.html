@@ -1,23 +1,76 @@
 <div class="container-fluid">
-  <h3>manage</h3>
-  <pre>{{allCards}}</pre>
+  <h3>Manage Flashcards</h3>
 
-  <div class="addCardArea text-center">
-    <form ng-submit='addCard(card)' class="form-inline">
-      <div class="form-group">
-        <input ng-model='card.description' type="text" class="form-control" placeholder="The question..." required>
+  <div class="managementArea">
+    <div class="row">
+      <div class="manageCategories col-xs-5">
+        <h3>Subject Management</h3>
+        <div class="form-group form-inline">
+          <input ng-model='newSubject' type="text" class="form-control" placeholder="Add new subject.." required>
+          <button ng-click='addNewSubject(newSubject)' class="btn btn-default">Add Subject</button>
+        </div>
+        <div class="delete-subject">
+          <div class="form-group form-inline ">
+            <label>Delete a Subject:</label>
+            <select ng-model='deleteSubject' class='form-control' required>
+              <option ng-repeat='category in categories' value='{{category}}'>
+                {{category}}
+              </option>
+            </select>
+          </div> <!-- TODO: delete functionality route-->
+          <button ng-click='deleteSubject(deleteSubject)' class="btn btn-danger">Delete Subject and All Associated Cards</button>
+        </div>
       </div>
-      <div class="form-group">
-        <input ng-model='card.answer' type="text" class="form-control" placeholder="The answer..." required>
+      <div class="addCardArea col-xs-7">
+        <form ng-submit='addCard(card)' class="form">
+          <h3>Add a New Card:</h3>
+          <div class="form-group">
+            <input ng-model='card.question' type="text" class="form-control" placeholder="The question..." required>
+          </div>
+          <div class="form-group">
+            <input ng-model='card.answer' type="text" class="form-control" placeholder="The answer..." required>
+          </div>
+          <div class="form-group selectDiv form-inline">
+            <label>Select a Subject:</label>
+            <select ng-model='card.category' class='form-control' required>
+              <option ng-repeat='category in categories' value='{{category}}'>
+                {{category}}
+              </option>
+            </select>
+            <button class="btn btn-default">Add Card</button>
+          </div>
+        </form>
       </div>
-      <div class="form-group selectDiv">
-        <select ng-model='card.category' class='form-control' value='credit'>
-          <option value="credit">Credit</option>
-          <option value="debit">Debit</option>
-        </select>
-      </div>
-      <button class="btn btn-default">Add Transaction</button>
-    </form>
+    </div>
   </div>
+  <div class="filter form-inline">
+    <label>Filter by Subject:</label>
+    <select ng-model='filterCards' class='form-control' required>
+      <option ng-repeat='category in categories' value='{{category}}'>
+        {{category}}
+      </option>
+    </select>
+  </div>
+  <div class="cardList">
+    <div class="card" ng-repeat='card in allCards | filter: {category:filterCards} track by $index'>
+      <div class="panel panel-default">
+        <div class="panel-heading">Subject:</div>
+        <div class="panel-body">{{card.category}}</div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">Question:</div>
+        <div class="panel-body">{{card.question}}</div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">Answer</div>
+        <div class="panel-body">{{card.answer}}</div>
+      </div>
+      <div class="actionButtons">
+        <button class="btn btn-warning">Edit</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+
 
 </div>
